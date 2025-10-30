@@ -46,6 +46,20 @@ Want additional triggers? [Open an issue](https://github.com/gitar-ai/rules/issu
 - Provides inline suggestions with corrected brand text
 - Explains why consistency matters for SEO and social sharing
 
+**[Rule Quality Standards](examples/rule-quality.md)** - Validates that new rules follow contributing guidelines
+- Checks for all required sections: title, conditions, standards, actions, and rationale
+- Ensures file patterns and actions are specific and actionable
+- Provides inline suggestions with correct structure and examples
+- Maintains consistency across all rules in the repository
+
+### Reviews & Collaboration
+
+**[PR Summary Enhancement](examples/pr-summary.md)** - Automatically enhances PR descriptions with AI-generated summaries
+- Analyzes commits to identify significant changes and their impact
+- Appends concise technical summaries to PR descriptions
+- Includes links to relevant release notes for dependency upgrades
+- Improves code review efficiency by providing quick technical overviews
+
 ## How Rules Work
 
 Gitar rules are simple markdown files that describe:
