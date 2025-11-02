@@ -1,1 +1,1 @@
-examples/pr-summary.md
+../../rules/code-review/pr-summary.md

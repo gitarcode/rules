@@ -4,8 +4,6 @@ Reusable Gitar rules for automating your repository workflows - no code required
 
 This repository collects community-contributed `.gitar/rules/*.md` files that define actions like commenting, labeling, assigning reviewers, and more - all written in natural language.
 
-**Use these examples as-is or modify them to match your project's needs.**
-
 ## What is Gitar?
 
 [Gitar](https://gitar.ai) is CI for the age of AI. Create automated workflows using natural language specified in `.gitar/rules/*.md` files. When conditions are met, Gitar automatically executes actions - no code required. [Learn more](https://docs.gitar.ai/working-with-gitar#repository-rules).
@@ -18,16 +16,18 @@ To use a rule from this repository:
 # Create the rules directory in your repository
 mkdir -p .gitar/rules
 
-# Copy a rule you want to use
-cp examples/brand.md .gitar/rules/
+# Copy a rule you want to use (browse rules/ folder to find rules)
+cp rules/product/brand-consistency.md .gitar/rules/
 
 # Commit and push
 git add .gitar/rules/
-git commit -m "Add Gitar brand rule"
+git commit -m "Add Gitar brand consistency rule"
 git push
 ```
 
 Gitar will automatically detect and apply the rules on your next pull request or commit.
+
+**Tip**: Browse the `rules/` directory to explore all available rules organized by category.
 
 ## When Rules Trigger
 
@@ -39,30 +39,45 @@ Want additional triggers? [Open an issue](https://github.com/gitar-ai/rules/issu
 
 ## Available Rules
 
-### Code Quality & Consistency
+Browse the `rules/` directory to explore available rules organized by category:
 
-**[Brand Consistency](examples/brand.md)** - Ensures consistent brand across web applications
-- Validates meta tags, titles, and descriptions in Next.js, HTML, and manifest files
-- Provides inline suggestions with corrected brand text
-- Explains why consistency matters for SEO and social sharing
+### [Code Quality & Consistency](rules/code-quality/)
+Enforce coding standards, style guidelines, and consistency across the codebase
 
-**[Rule Quality Standards](examples/rule-quality.md)** - Validates that new rules follow contributing guidelines
-- Checks for all required sections: title, conditions, standards, actions, and rationale
-- Ensures file patterns and actions are specific and actionable
-- Provides inline suggestions with correct structure and examples
-- Maintains consistency across all rules in the repository
+### [Product Quality](rules/product/)
+Ensure consistent user-facing product quality including branding, messaging, and localization
 
-### Reviews & Collaboration
-
-**[PR Summary Enhancement](examples/pr-summary.md)** - Automatically enhances PR descriptions with AI-generated summaries
-- Analyzes commits to identify significant changes and their impact
-- Appends concise technical summaries to PR descriptions
-- Includes links to relevant release notes for dependency upgrades
-- Improves code review efficiency by providing quick technical overviews
+### [Reviews & Collaboration](rules/code-review/)
+Enhance code review workflows and team collaboration
 
 ## How Rules Work
 
-Gitar rules are simple markdown files that describe:
+Gitar rules are markdown files with two key components:
+
+### 1. YAML Frontmatter
+
+Frontmatter provides metadata that helps Gitar determine rule applicability efficiently:
+
+```yaml
+---
+title: "Log Statement Consistency"
+description: "Enforce consistent logging style and structured format across the codebase"
+when: "PRs that add or modify log statements"
+actions: "Post inline comments comparing to existing patterns and apply 'logging-style' label"
+---
+```
+
+Fields:
+- **title**: Rule name
+- **description**: Brief summary (1-2 sentences)
+- **when**: Natural language trigger description
+- **actions**: What Gitar will do
+- **integrations** (optional): Required integrations (e.g., `slack`, `jira` etc.)
+
+
+### 2. Markdown Content
+
+The rule body describes:
 
 1. **When** the rule should trigger (conditions)
 2. **What** Gitar should check or validate
@@ -71,20 +86,34 @@ Gitar rules are simple markdown files that describe:
 Example rule structure:
 
 ```markdown
+---
+title: "Rule Name"
+description: "Brief description of what this rule does"
+when: "Natural language description of when to apply"
+actions: "Brief summary of actions taken"
+---
+
 # Rule Name
 
 Brief description of what this rule does.
 
-## When to Apply This Rule
+## When to Use This
 
-- Condition 1
-- Condition 2
+- Condition 1: Specific trigger
+- Condition 2: Another trigger
 
-## Actions
+## How It Works
 
-1. Check for X
-2. If Y is found, comment with Z
-3. Add label "needs-review"
+1. Check for X against criteria
+2. Validate Y matches expected pattern
+3. If issues found → post inline comment with Z
+4. Apply label "needs-review"
+5. Reference external docs if needed
+
+## Why This Matters
+
+- Benefit 1: Specific value provided
+- Benefit 2: Problem prevented
 ```
 
 ### Supported Actions
@@ -96,6 +125,7 @@ Gitar can:
 - **Suggest code changes** with inline suggestions
 - **Make the code changes** if [auto accept changes](https://go.gitar.ai/workflow-docs) is on
 - **Validate** code quality, documentation, or compliance requirements
+- **Integrate with other tools*** grab context from jira, send messages to slack, update notion docs.
 - Much more - get creative with your rules!
 
 ## Contributing
@@ -114,10 +144,14 @@ Beyond brand consistency, Gitar rules can automate:
 
 - **Dependency Management** - Comment with upgrade guides when dependencies change
 - **Documentation Sync** - Keep docs in sync when APIs change
-- **Smart Reviewer Assignment** - Assign reviewers based on code complexity, risk level, or domain expertise
 - **Security Gates** - Require additional approvals when changes introduce security risks
 - **PR Size Checks** - Flag large PRs and suggest breaking them down
 - **Release Preparation** - Post deployment checklists before merging to main
+- **Automated Changelogs** - Generate and update CHANGELOG.md with technical changes on PR merge
+- **Release Notes** - Create user-facing product update announcements from merged features
+- **Knowledge Base Updates** - Sync API changes to Confluence or Notion documentation automatically
+- **Infrastructure Alerts** - Send Slack notifications when CI infrastructure failures are detected
+- **Project Management Sync** - Summarize PR changes and post updates to Jira tickets or Notion on merge
 
 ## Resources
 
