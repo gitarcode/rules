@@ -48,7 +48,7 @@ Apply when gitar rule markdown files are added or modified.
    - Extract `when` from "When to Use This" section
    - Extract `actions` from "How It Works" section (summarize key actions)
    - **Do not** suggest `integrations` field (maintainers handle this)
-   - Post as an inline code suggestion at the top of the file
+   - Post as an inline code suggestion at where the frontmatter should be
 
 5. **Post inline comments** for issues:
    - Missing or incomplete frontmatter → suggest auto-generated version
