@@ -1,1 +1,1 @@
-examples/rule-quality.md
+../../rules/code-quality/rule-quality.md

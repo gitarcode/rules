@@ -9,9 +9,10 @@ We welcome contributions from the community! Whether you're sharing a rule you'v
 If you have a Gitar rule that works well for your team, consider sharing it:
 
 1. **Fork this repository**
-2. **Add your rule** to the `examples/` directory
-3. **Update the README** to list your rule under the appropriate category
+2. **Choose the appropriate category** in the `rules/` directory
+3. **Write your rule** following the markdown structure below (don't worry about frontmatter - Gitar will suggest it!)
 4. **Submit a pull request** with a clear description of what your rule does
+5. **Review Gitar's suggestions** for frontmatter and structure, then update as needed
 
 ### 2. Improve Existing Rules
 
@@ -34,35 +35,71 @@ If you find a problem with a rule or have suggestions:
 
 ### Structure
 
-Every rule should follow this general structure:
+Every rule must include two components: **YAML frontmatter** and **markdown content**.
+
+#### 1. YAML Frontmatter (Auto-Suggested)
+
+**Don't worry about writing frontmatter yourself!** When you submit a rule, Gitar will automatically analyze your content and suggest appropriate frontmatter. You can then review and adjust as needed.
+
+However, if you want to include it, here's the format:
+
+```yaml
+---
+title: "Rule Title"
+description: "Brief description (1-2 sentences)"
+when: "Natural language description of when this rule applies"
+actions: "Brief summary of what actions this rule takes"
+---
+```
+
+**Frontmatter Field Guide:**
+
+- **title**: Clear, descriptive title (3-8 words)
+- **description**: Brief summary for (1-2 sentences)
+- **when**: Natural language one-liner describing when this rule applies. Don't over-specify file patterns or change types - Gitar can infer most of this. Be natural and clear.
+- **actions**: Brief summary of what actions Gitar will take (1 sentence)
+
+**Example:**
+
+```yaml
+---
+title: "Log Statement Consistency"
+description: "Enforce consistent logging style and structured format across the codebase"
+when: "PRs that add or modify log statements"
+actions: "Post inline comments comparing to existing patterns and apply 'logging-style' label"
+---
+```
+
+#### 2. Markdown Content (Required)
+
+After frontmatter, include these 3 sections:
 
 ```markdown
 # Rule Title
 
-Brief 1-2 sentence description of what this rule does and why it's useful.
+Brief 1-2 sentence description of what this rule does.
 
-## When to Apply This Rule
+## When to Use This
 
 Clear list of conditions that trigger this rule:
 - Specific file patterns or paths
 - Types of changes (new files, modifications, deletions)
-- Content patterns to detect
+- Specific conditions that apply
 
-## Required Standards / Expected Behavior
+## How It Works
 
-Detailed explanation of what Gitar should check for:
-- Specific patterns to match
-- Code examples showing correct vs. incorrect
-- Any validation logic
+Step-by-step procedure showing the workflow:
+1. Check/validate something against criteria
+2. Compare against existing patterns or reference files
+3. Post inline comments with suggestions
+4. Apply labels or assign reviewers
+5. Update PR descriptions or other actions
 
-## Actions / Enforcement
-
-What Gitar should do when conditions are met:
-1. Check for compliance
-2. Post comments with specific guidance
-3. Apply labels
-4. Assign reviewers
-5. Suggest code changes
+Include:
+- Code examples showing correct vs. incorrect patterns
+- References to external files/docs if used
+- Conditionals ("if X then Y")
+- The complete procedure from detection to action
 
 ## Why This Matters
 
@@ -117,18 +154,15 @@ When adding a rule:
 3. **Include inline comments** if your rule has complex logic
 4. **Add examples** showing both compliant and non-compliant code
 
-## Categories
+## Categories and Structure
 
-When adding your rule to the README, place it in one of these categories:
+Rules are organized into categories
 
-- **Code Quality & Consistency** - Linting, formatting, standards enforcement
-- **Documentation** - README updates, API doc sync, changelog requirements
-- **Dependencies** - Package upgrades, vulnerability checks, license compliance
-- **Reviews & Collaboration** - Reviewer assignment, PR size checks, approval requirements
-- **Automation & Workflows** - CI checks, deployment preparation, release management
-- **Security & Compliance** - Secret detection, access control, audit logging
+**Adding a New Category:**
+1. Create folder: `rules/new-category/`
+2. Add `_category.yml` file with metadata (see existing examples)
+3. Update this guide and README.md
 
-Don't see a category that fits? Suggest a new one in your PR.
 
 ## Code of Conduct
 
