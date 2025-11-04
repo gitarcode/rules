@@ -1,6 +1,7 @@
 ---
 title: "Brand Consistency"
 description: "Enforce unified brand messaging across web metadata, titles, and descriptions"
+slug: "gitar_brand_consistency"
 when: "Changes to Next.js layouts/pages with metadata exports, HTML files, or web manifest files"
 actions: "Post inline code suggestions with corrected brand text"
 ---

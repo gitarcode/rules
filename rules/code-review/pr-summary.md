@@ -1,6 +1,7 @@
 ---
 title: "PR Summary Enhancement"
 description: "Automatically enhance pull request descriptions with concise AI-generated summaries"
+slug: "gitar_pr_summary"
 when: "New commits pushed to existing PR with meaningful functionality, bug fixes, or architectural changes"
 actions: "Update or append 'Summary by Gitar' section to PR description with technical summary"
 integrations: "github"

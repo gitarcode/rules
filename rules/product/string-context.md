@@ -1,6 +1,7 @@
 ---
 title: "String Context for Translation"
 description: "Ensure ambiguous strings in localization files include translator context comments"
+slug: "gitar_string_context"
 when: "PRs that modify Android strings.xml, iOS Localizable.strings, or i18n/localization JSON files"
 actions: "Post inline suggestions with context comments and apply 'needs-translation-context' label"
 ---
