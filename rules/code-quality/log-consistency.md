@@ -1,6 +1,7 @@
 ---
 title: "Log Statement Consistency"
 description: "Enforce consistent logging style and structured format across the codebase"
+slug: "log_consistency"
 when: "PRs that add or modify log statements"
 actions: "Post inline comments comparing to existing patterns and apply 'logging-style' label"
 ---

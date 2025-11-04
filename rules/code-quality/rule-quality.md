@@ -1,6 +1,7 @@
 ---
 title: "Rule Quality Standards"
 description: "Ensures all rules follow established structure, conventions, and include proper YAML frontmatter"
+slug: "rule_quality"
 when: "Gitar rule markdown files are added or modified"
 actions: "Post inline comments with structural suggestions and auto-generated frontmatter"
 ---
