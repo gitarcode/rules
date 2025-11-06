@@ -2,7 +2,7 @@
 title: "PR Summary Enhancement"
 description: "Automatically enhance pull request descriptions with concise AI-generated summaries"
 slug: "pr_summary"
-when: "New commits pushed to existing PR with meaningful functionality, bug fixes, or architectural changes"
+when: "PR is created or new commits are pushed with meaningful functionality, bug fixes, or architectural changes"
 actions: "Update or append 'Summary by Gitar' section to PR description with technical summary"
 integrations: "github"
 ---
@@ -14,6 +14,7 @@ Automatically enhance pull request descriptions with a concise AI-generated summ
 ## When to Use This
 
 Apply when:
+- A new pull request is created
 - New commits are pushed to an existing pull request
 - Changes significantly alter the PR's scope or purpose
 - Meaningful functionality, bug fixes, or architectural changes are introduced
@@ -28,7 +29,8 @@ Do NOT apply for:
 1. **Check for existing summary**: Look for a "Summary by Gitar" section in the PR description
 
 2. **Analyze commit history**:
-   - Examine commits since PR creation or last significant update
+   - For new PRs: Examine all commits in the PR
+   - For existing PRs: Examine commits since last significant update
    - Identify change types: new features, bug fixes, refactoring, documentation, tests, dependency updates
    - Note which codebase areas are affected
    - For dependency/platform upgrades (React, Node, Rust, Spring, etc.), search for official release notes
