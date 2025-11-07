@@ -22,44 +22,54 @@ Apply when changes involve:
 
 ## How It Works
 
-**Official Brand Reference:**
-- **Tagline**: "Gitar.ai is CI for the age of AI"
-- **Description**: "Bring AI to your CI. Automatically fix broken builds and address review feedback so you can merge more code, faster"
-- **Site Name**: "Gitar.ai"
+**Finding Official Brand Reference:**
+1. First, check the repository's README.md for brand information:
+   - Look for the project title (typically in the H1 heading)
+   - Find the tagline or description (usually in the first few paragraphs or under the title)
+   - Extract the official product/site name
+   - Note any specific formatting preferences (e.g., capitalization, special characters)
+
+2. If README.md doesn't contain clear brand messaging, check:
+   - `package.json` (name, description fields)
+   - Documentation site homepage
+   - Marketing/landing page content
+   - Existing metadata in current codebase
+
+**Validating Brand Consistency:**
 
 1. **Verify Next.js metadata exports** match official brand:
    ```typescript
    export const metadata: Metadata = {
-     title: "Gitar.ai - CI for the age of AI",
-     description: "Bring AI to your CI. Automatically fix broken builds and address review feedback so you can merge more code, faster",
+     title: "[Product Name] - [Tagline]",
+     description: "[Official product description from README]",
      openGraph: {
-       title: "Gitar.ai - CI for the age of AI",
-       description: "Bring AI to your CI. Automatically fix broken builds and address review feedback so you can merge more code, faster",
-       siteName: "Gitar.ai",
+       title: "[Product Name] - [Tagline]",
+       description: "[Official product description from README]",
+       siteName: "[Product Name]",
        type: "website",
        locale: "en_US",
      },
      twitter: {
        card: "summary_large_image",
-       title: "Gitar.ai - CI for the age of AI",
-       description: "Bring AI to your CI. Automatically fix broken builds and address review feedback so you can merge more code, faster",
+       title: "[Product Name] - [Tagline]",
+       description: "[Official product description from README]",
      },
    };
    ```
-   **Note**: Page-specific titles can have a prefix (e.g., "Repositories - Gitar.ai") but must always include "Gitar.ai"
+   **Note**: Page-specific titles can have a prefix (e.g., "Features - [Product Name]") but must always include the product name
 
 2. **Check HTML files** include proper meta tags:
    ```html
-   <meta name="description" content="Bring AI to your CI. Automatically fix broken builds and address review feedback so you can merge more code, faster" />
-   <title>Gitar.ai - CI for the age of AI</title>
+   <meta name="description" content="[Official product description from README]" />
+   <title>[Product Name] - [Tagline]</title>
    ```
 
 3. **Validate web manifest files**:
    ```json
    {
-     "name": "Gitar.ai - CI for the age of AI",
-     "short_name": "Gitar.ai",
-     "description": "Bring AI to your CI. Automatically fix broken builds and address review feedback so you can merge more code, faster"
+     "name": "[Product Name] - [Tagline]",
+     "short_name": "[Product Name]",
+     "description": "[Official product description from README]"
    }
    ```
 
