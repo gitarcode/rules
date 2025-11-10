@@ -50,6 +50,9 @@ Ensure consistent user-facing product quality including branding, messaging, and
 ### [Reviews & Collaboration](rules/code-review/)
 Enhance code review workflows and team collaboration
 
+### [Workflows](rules/workflows/)
+Automate common CI workflows and improve development processes
+
 ## How Rules Work
 
 Gitar rules are markdown files with two key components:
