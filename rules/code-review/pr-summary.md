@@ -2,7 +2,7 @@
 title: "PR Summary Enhancement"
 description: "Enhance pull request descriptions with technical summaries based on commits and code changes"
 slug: "pr_summary"
-when: "PRs with empty, minimal, template-only descriptions, or when implementation significantly diverges from existing description"
+when: "New PRs are created or PRs are updated with new commits (when descriptions are empty, minimal, template-only, or implementation diverges from description)"
 actions: "Append 'Summary by Gitar' section with 2-5 technical bullet points to PR description"
 integrations: "github"
 ---
