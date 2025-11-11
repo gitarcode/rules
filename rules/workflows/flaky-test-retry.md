@@ -14,19 +14,19 @@ Automatically detect flaky test failures and retry CI jobs to prevent false-nega
 ## When to Use This
 
 Apply when:
-- CI/CD pipeline fails due to test failures
-- Test failures show characteristics of flakiness (timing, network, race conditions)
+- CI/CD pipeline fails due to test failures OR infrastructure/dependency issues
+- Failures show characteristics of flakiness (timing, network, race conditions)
 - Job has not been retried more than the configured maximum (default: 2 retries)
 
 Do NOT apply for:
-- Compilation or build errors
+- Code compilation errors (syntax errors, type errors, missing symbols)
 - Linting or static analysis failures
 - Tests that fail consistently across runs
 - Manual test runs or local development
 
 ## How It Works
 
-1. **Detect flaky test patterns** in CI failure logs:
+1. **Detect flaky patterns** in CI failure logs:
    - **Timeout failures**: Tests that exceed time limits inconsistently
      ```
      Error: Test exceeded 5000ms timeout
@@ -37,6 +37,14 @@ Do NOT apply for:
      Error: connect ECONNREFUSED 127.0.0.1:3000
      Error: Failed to fetch from api.example.com
      socket hang up
+     ```
+   - **Build-time dependency/infrastructure failures**:
+     ```
+     Failed to connect to registry.npmjs.org
+     Failed to connect to port 443: No route to host
+     Error downloading from maven central
+     Temporary failure resolving 'pypi.org'
+     curl: (7) Failed to connect to remote host
      ```
    - **Race conditions and timing issues**:
      ```
