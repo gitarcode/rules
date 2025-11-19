@@ -157,6 +157,7 @@ Automatically enhance pull request descriptions with concise technical summaries
    - **[Another top-level change]**
      - Sub-detail 1
      - Sub-detail 2
+
    ```
 
    **Hierarchical formatting rules:**
@@ -218,6 +219,28 @@ Automatically enhance pull request descriptions with concise technical summaries
    - If section exists but needs updates → replace with new content
    - If section doesn't exist → append to end
    - Preserve existing user content
+
+   **Formatting requirements when appending:**
+   - Add a blank line before the opening `---` separator
+   - Add a blank line after the closing bullet list, before the closing `---` separator
+   - This ensures proper markdown rendering and clean separation from other content
+
+   **Example of correct spacing:**
+   ```markdown
+   [Existing PR description content]
+
+   ---
+
+   ## Summary by Gitar
+
+   - **First bullet point**
+     - Sub-detail
+   - **Second bullet point**
+     - Sub-detail
+
+   ---
+   [Any additional content like preview links, Jira links, etc.]
+   ```
 
 ## Examples by PR Type
 
