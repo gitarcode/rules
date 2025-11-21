@@ -140,78 +140,61 @@ Automatically enhance pull request descriptions with concise technical summaries
    5. **Performance/security** - Optimizations, vulnerability fixes
    6. **Infrastructure** - Build, deploy, monitoring, dependencies
 
-6. **Generate summary** using hierarchical format:
+6. **Apply stable category patterns**:
+
+   **Category Patterns** (choose based on change type):
+   - `New [artifact]` - New authentication service, New `parseUserInput` helper
+   - `[Component] refactor` - Database layer refactor, API client refactor
+   - `Fixed [problem]` - Fixed memory leak, Fixed race condition
+   - `[Service] integration` - Redis caching integration, Stripe payments integration
+   - `Updated [dependency]` - Updated Node 18 → 20, Updated React 18.2 → 18.3
+   - `[System] configuration` - CI/CD pipeline configuration, Docker containerization
+   - `Performance optimization` / `Security enhancement` - For perf/security improvements
+
+   **Principles:**
+   - Top-level bullets are ONLY category/pattern labels (no data)
+   - ALL context and details go in sub-bullets (1-2 per category)
+   - Use specific artifact names in sub-bullets (not "Updated code structure")
+   - Focus on purpose, not mechanics
+   - Allow flexibility for novel changes or team-specific categories
+
+7. **Generate summary** with hierarchical structure:
 
    ```markdown
    ---
-
    ## Summary by Gitar
 
-   - **[Main change or category]**: Description with `artifact-name` in code format
-     - Technical detail about implementation approach
-     - Impact, motivation, or why this matters
-     - Related changes or files affected
-   - **[New utility/function]**: `createHelperFunction` in `path/to/file.ts`
-     - What it does and problem it solves
-     - Where it's used or who benefits
-   - **[Another top-level change]**
-     - Sub-detail 1
-     - Sub-detail 2
-
+   - **[Stable pattern category]**
+     - Key context with artifact in `code format`
+     - Additional detail if needed
+   - **New helper**
+     - `functionName` in `path/to/file.ts` does X and solves Y
    ```
 
-   **Hierarchical formatting rules:**
+   **Format:**
+   - **Top-level**: Category/pattern label ONLY ending with `:` (e.g., "**Authentication refactor:**", "**New helper:**")
+   - **Sub-bullets**: 1-2 with ALL context and artifacts in `code format`
+   - Use **bold** for categories, `code format` for files/functions/APIs
+   - Keep sub-bullets 1-2 sentences max
 
-   - **Top-level bullets**: Scannable headlines about the main changes
-     - Start with **bold category or main change description**
-     - Include artifact names in `code format` (files, functions, classes)
-     - Keep to one sentence summarizing the "what"
-
-   - **Sub-bullets (indented 2 spaces)**: Rich technical context
-     - Implementation details and approach
-     - Motivation, impact, or benefits
-     - Related changes or affected areas
-     - Keep each sub-bullet to 1-2 sentences max
-
-   - **Formatting conventions:**
-     - Use **bold** for: change categories, key concepts, important terms
-     - Use `code formatting` for: artifact names, file paths, technical values, API names
-     - Front-load important information in each bullet
-     - Nest 2-3 sub-bullets per top-level item (adjust based on complexity)
-
-   **Example of good hierarchical structure:**
+   **Example:**
    ```markdown
-   - **Refactored authentication module** into focused services
-     - Split monolithic `auth/AuthService.ts` (800 lines) into 6 modules under `auth/services/*`
-     - Separated concerns: token management, session handling, OAuth flows
+   - **Authentication module refactor:**
+     - Split `auth/AuthService.ts` (800 lines) into 6 modules under `auth/services/*`
      - Added barrel export in `auth/index.ts` for backward compatibility
 
-   - **Added `validateUserPermissions` helper** in `auth/utils/permissions.ts`
-     - Centralized role-based access control (RBAC) logic
-     - Replaces duplicated permission checks across 12 components
-     - Supports hierarchical role inheritance
+   - **New helper:**
+     - `validateUserPermissions` in `auth/utils/permissions.ts` centralizes RBAC logic
 
-   - **Fixed session timeout bug** causing premature logouts
+   - **Fixed memory leak:**
      - Corrected token refresh timing in `TokenManager.ts:145`
-     - Added retry logic for failed refresh attempts
-     - Resolved race condition between refresh and API calls
    ```
 
-   **Anti-patterns to avoid:**
+   **Anti-patterns:**
    ```markdown
-   ❌ Flat structure without hierarchy:
-   - Refactored auth module by splitting AuthService.ts
-   - Added validateUserPermissions helper
-   - Fixed session timeout bug
-   - Corrected token refresh timing
-   - Added retry logic
-
-   ❌ Highlighting byproducts as main points:
-   - Resolved circular dependency between AuthService and TokenManager
-   - Refactored authentication module into focused services
-
-   ❌ Burying new artifacts in narrative:
-   - Refactored authentication module, which involved creating a new validateUserPermissions helper to centralize RBAC logic
+   ❌ Data in top-level: "**New `validateUserPermissions` helper** in auth/utils/permissions.ts"
+   ❌ Unstable categories: "Enhanced permission checking with new helper"
+   ❌ Buried artifacts: "Auth refactor involving new validateUserPermissions helper"
    ```
 
 7. **Update PR description**:
@@ -244,164 +227,53 @@ Automatically enhance pull request descriptions with concise technical summaries
 
 ## Examples by PR Type
 
-### Large Refactoring PR
-
-**Scenario**: Splitting a 1200-line utility file into 47 modular files
-
-**Good summary structure:**
+### Refactoring
 ```markdown
-## Summary by Gitar
-
-- **Refactored monolithic `utils/dataProcessing.ts`** into 47 modular files
-  - Organized utilities into focused modules under `utils/dataProcessing/*` (constants, parsing, validation, types)
-  - Each module has single responsibility and clear boundaries
-  - Added barrel export in `utils/dataProcessing.ts` to maintain backward compatibility with existing imports
-
-- **Introduced `buildQueryStringFromFilters` helper** in `utils/dataProcessing/queryString.ts`
-  - Constructs backend query strings from filter objects
-  - Simplifies API integration in `DataAPI.tsx` and `FilterPanel.tsx`
-  - Eliminates manual query parameter construction
-
-- **Resolved circular dependencies** between processing modules
-  - Consolidated related functions in `FilterLogic.ts`, `ParamBuilder.ts`, and `FilterFactory.ts`
-  - Updated import paths in 15 test files to use new module structure
+- **Data utilities refactor:**
+  - Split `utils/dataProcessing.ts` (1200 lines) into 47 focused modules
+  - Added barrel export for backward compatibility
+- **New helper:**
+  - `buildQueryStringFromFilters` in `utils/dataProcessing/queryString.ts` constructs backend query strings from filter objects
 ```
 
-**Why this works:**
-- Top-level bullets are scannable: "refactoring", "new helper", "fixed dependencies"
-- New utility `buildQueryStringFromFilters` is highlighted as distinct item, not buried
-- Circular dependency fix is acknowledged but nested as implementation detail
-- Each bullet explains what, why, and impact
-
-### Feature Addition PR
-
-**Scenario**: Adding OAuth authentication
-
-**Good summary structure:**
+### Feature Addition
 ```markdown
-## Summary by Gitar
-
-- **Added OAuth 2.0 authentication** for Google and GitHub providers
-  - Users can now sign in using external accounts instead of email/password
-  - Implemented PKCE flow for enhanced security
-  - Added account linking for users with existing credentials
-
-- **Created `OAuthManager` service** in `auth/services/OAuthManager.ts`
-  - Handles provider registration, token exchange, and refresh logic
-  - Supports extensible provider configuration via `auth/config/providers.ts`
-  - Manages state/nonce generation and validation
-
-- **Added new OAuth routes** to API
-  - `POST /api/auth/oauth/initiate` - Starts OAuth flow
-  - `GET /api/auth/oauth/callback` - Handles provider redirects
-  - `POST /api/auth/oauth/link` - Links OAuth account to existing user
-
-- **Updated UI with social login buttons** in login and signup flows
-  - Added `SocialLoginButton` component with provider branding
-  - Responsive design for mobile and desktop
-  - Loading states and error handling for failed auth attempts
+- **OAuth integration:**
+  - Google and GitHub providers with PKCE flow and account linking
+- **New service:**
+  - `OAuthManager` in `auth/services/OAuthManager.ts` handles provider registration, token exchange, and refresh
+- **New API endpoints:**
+  - `POST /api/auth/oauth/initiate`, `GET /api/auth/oauth/callback`, `POST /api/auth/oauth/link`
 ```
 
-**Why this works:**
-- Leads with user-facing feature (OAuth authentication)
-- New service and routes are distinct bullets (artifacts)
-- UI changes are separate from backend implementation
-- Clear what was added and what value it provides
-
-### Bug Fix PR
-
-**Scenario**: Fixing memory leak in WebSocket connection
-
-**Good summary structure:**
+### Bug Fix
 ```markdown
-## Summary by Gitar
-
-- **Fixed memory leak in WebSocket connection handling**
-  - Resolved issue where connections weren't properly cleaned up on unmount
-  - Added `useEffect` cleanup in `hooks/useWebSocket.ts:67` to close connections
-  - Prevents browser tab crashes after ~50 page navigations
-
-- **Added connection lifecycle tracking** in `WebSocketManager.ts`
-  - New `activeConnections` Map to track all open connections
-  - Implements `cleanupStaleConnections()` method called on visibility change
-  - Logs connection count for monitoring and debugging
-
-- **Improved error handling** for connection failures
-  - Added exponential backoff for reconnection attempts (max 5 retries)
-  - Surfaces connection errors to UI via `ConnectionStatus` component
-  - Graceful degradation when WebSocket unavailable
+- **Fixed memory leak:**
+  - Added `useEffect` cleanup in `hooks/useWebSocket.ts:67` to prevent browser crashes
+- **New lifecycle tracking:**
+  - `activeConnections` Map in `WebSocketManager.ts` tracks open connections
 ```
 
-**Why this works:**
-- Leads with the bug and fix (what was broken, what's fixed)
-- New tracking mechanism is separate bullet (new artifact)
-- Implementation details are nested under main points
-- Shows impact (prevents crashes) and where fix was applied
-
-### Dependency Upgrade PR
-
-**Scenario**: Upgrading React and related libraries
-
-**Good summary structure:**
+### Dependency Upgrade
 ```markdown
-## Summary by Gitar
-
-- **Upgraded React from 18.2 to 18.3** ([release notes](https://react.dev/blog/2024/04/25/react-19))
-  - Improved concurrent rendering performance
-  - New `use` Hook for reading resources in components
-  - Better TypeScript support for refs and context
-
-- **Updated related dependencies** for compatibility
-  - `react-dom`: 18.2 → 18.3
-  - `@types/react`: 18.2.45 → 18.3.1
-  - `@testing-library/react`: 14.0 → 14.3
-
-- **Fixed breaking changes** in component tests
-  - Updated `waitFor` assertions to use new async rendering behavior
+- **Updated React:**
+  - 18.2 → 18.3 ([release notes](https://react.dev/blog/2024/04/25/react-19)) with improved concurrent rendering and new `use` Hook
+- **Fixed breaking changes:**
   - Replaced deprecated `ReactDOM.render` with `createRoot` in 3 test files
-  - Fixed type errors in `useContext` calls with stricter type checking
 ```
 
-**Why this works:**
-- Main upgrade is top-level with link to release notes
-- Related dependencies are grouped together
-- Breaking changes and fixes are clearly called out
-- Shows what needed adjustment and why
+## Quick Reference
 
-## Quick Reference: Summary Checklist
+**Verify:**
+- Top-level bullets are ONLY category labels ending with `:` (stable patterns)
+- ALL data/context in sub-bullets (1-2 per category)
+- Specific artifact names in sub-bullets with `code format`
+- New artifacts as distinct categories
 
-When generating a PR summary, verify:
-
-**✅ Structure**
-- [ ] Top-level bullets are scannable headlines (bold category + artifact name in code format)
-- [ ] Sub-bullets provide rich technical context (2-3 per main item)
-- [ ] Information is hierarchical, not flat
-- [ ] Front-loaded: Most important info comes first in each bullet
-
-**✅ Content Prioritization**
-- [ ] New artifacts (files, functions, APIs) are highlighted as distinct top-level bullets
-- [ ] Implementation details (circular deps, test org) are nested or omitted
-- [ ] Changes are grouped by impact: Features → Utilities → Architecture → Fixes → Infrastructure
-- [ ] Byproducts and refactoring mechanics are de-emphasized
-
-**✅ Clarity**
-- [ ] Each bullet is 1-2 sentences max
-- [ ] Technical terms use `code formatting`
-- [ ] Key concepts use **bold formatting**
-- [ ] File paths and artifact names are precise (`path/to/file.ts:123`)
-
-**✅ Value**
-- [ ] Summary adds information not obvious from PR title
-- [ ] Explains "what" and "why", not just "how"
-- [ ] Links to relevant docs/release notes where applicable
-- [ ] Reviewers can understand changes without reading all commits
-
-**❌ Anti-patterns to Avoid**
-- [ ] Flat bullet lists without hierarchy
-- [ ] Highlighting byproducts (circular dependencies) as main points
-- [ ] Burying new utilities in refactoring narratives
-- [ ] Generic statements without specific artifact names
-- [ ] Over-explaining trivial changes
+**Avoid:**
+- Data in top-level bullets or missing `:`
+- Unstable/dynamic categories
+- Buried artifacts, padding sub-bullets
 
 ## Why This Matters
 
