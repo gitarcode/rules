@@ -140,52 +140,84 @@ Automatically enhance pull request descriptions with concise technical summaries
    5. **Performance/security** - Optimizations, vulnerability fixes
    6. **Infrastructure** - Build, deploy, monitoring, dependencies
 
-6. **Apply stable category patterns**:
+6. **Select changes using priority scoring**:
+
+   **CRITICAL: Score and filter ruthlessly**
+
+   Before writing, score every change (1-10):
+   - **9-10**: New user-facing features, critical bug fixes, breaking changes
+   - **8-9**: New public APIs/helpers, significant refactors, integrations
+   - **7-8**: Minor features, config changes, infrastructure improvements
+   - **6 and below**: Implementation details, test reorgs, file moves - **SKIP THESE**
+
+   **Only include changes scoring 7 or higher**
+
+7. **Apply adaptive category limits based on PR size**:
+
+   **Flexible Category Count** (adapts to PR complexity):
+
+   | PR Size | Files Changed | Category Count | Word Target |
+   |---------|--------------|----------------|-------------|
+   | Small | <5 files | 2-3 categories | 30-50 words |
+   | Medium | 5-15 files | 3-4 categories | 50-80 words |
+   | Large | 15+ files | 4-5 categories | 80-150 words |
+
+   **Hard constraints:**
+   - **Minimum**: 2 categories (only if PR truly has <3 important changes)
+   - **Maximum**: 5 categories (hard stop, even if more high-priority items exist)
+   - **Word cap**: 150 words maximum regardless of PR size
+
+   **Selection process:**
+   1. Count files changed in PR
+   2. Determine PR size category (small/medium/large)
+   3. Filter to changes scoring 7+
+   4. Select top N changes that fit in the category range for that PR size
+   5. If filtered changes exceed max categories, take highest-scoring ones only
+
+8. **Use stable category patterns**:
 
    **Category Patterns** (choose based on change type):
-   - `New [artifact]` - New authentication service, New `parseUserInput` helper
-   - `[Component] refactor` - Database layer refactor, API client refactor
-   - `Fixed [problem]` - Fixed memory leak, Fixed race condition
-   - `[Service] integration` - Redis caching integration, Stripe payments integration
-   - `Updated [dependency]` - Updated Node 18 → 20, Updated React 18.2 → 18.3
-   - `[System] configuration` - CI/CD pipeline configuration, Docker containerization
-   - `Performance optimization` / `Security enhancement` - For perf/security improvements
+   - `New [artifact]:` - New authentication service, New `parseUserInput` helper
+   - `[Component] refactor:` - Database layer refactor, API client refactor
+   - `Fixed [problem]:` - Fixed memory leak, Fixed race condition
+   - `[Service] integration:` - Redis caching integration, Stripe payments integration
+   - `Updated [dependency]:` - Updated Node 18 → 20, Updated React 18.2 → 18.3
+   - `[System] configuration:` - CI/CD pipeline configuration, Docker containerization
+   - `Performance optimization:` / `Security enhancement:` - For perf/security improvements
 
-   **Principles:**
-   - Top-level bullets are ONLY category/pattern labels (no data)
-   - ALL context and details go in sub-bullets (1-2 per category)
-   - Use specific artifact names in sub-bullets (not "Updated code structure")
+   **Format rules:**
+   - **Top-level bullets**: Category label ONLY ending with `:` (no data, no details)
+   - **Sub-bullets**: ALL context and artifacts in `code format` (1-2 per category max)
+   - Use specific artifact names (not "Updated code structure")
    - Focus on purpose, not mechanics
-   - Allow flexibility for novel changes or team-specific categories
+   - Each sub-bullet one concise sentence
 
-7. **Generate summary** with hierarchical structure:
+9. **Generate summary** with hierarchical structure:
 
    ```markdown
    ---
    ## Summary by Gitar
 
-   - **[Stable pattern category]**
-     - Key context with artifact in `code format`
-     - Additional detail if needed
-   - **New helper**
-     - `functionName` in `path/to/file.ts` does X and solves Y
+   - **[Stable pattern category]:**
+     - Context with artifact in `code format` (one concise sentence)
+     - Additional detail if needed (one concise sentence)
+   - **[Another category]:**
+     - Context with artifact in `code format`
    ```
 
-   **Format:**
-   - **Top-level**: Category/pattern label ONLY ending with `:` (e.g., "**Authentication refactor:**", "**New helper:**")
-   - **Sub-bullets**: 1-2 with ALL context and artifacts in `code format`
-   - Use **bold** for categories, `code format` for files/functions/APIs
-   - Keep sub-bullets 1-2 sentences max
+   **Format requirements:**
+   - **Top-level**: Category label ONLY ending with `:` (e.g., `**Authentication refactor:**`)
+   - **Sub-bullets**: 1-2 per category with ALL context and artifacts in `code format`
+   - **Bold** for categories, `code format` for files/functions/APIs
+   - Each sub-bullet: 10-20 words, one sentence
+   - Total word count: Stay within target range for PR size (max 150 words)
 
-   **Example:**
+   **Example (Medium PR - 3 categories, 45 words):**
    ```markdown
-   - **Authentication module refactor:**
+   - **Authentication refactor:**
      - Split `auth/AuthService.ts` (800 lines) into 6 modules under `auth/services/*`
-     - Added barrel export in `auth/index.ts` for backward compatibility
-
    - **New helper:**
      - `validateUserPermissions` in `auth/utils/permissions.ts` centralizes RBAC logic
-
    - **Fixed memory leak:**
      - Corrected token refresh timing in `TokenManager.ts:145`
    ```
@@ -193,11 +225,12 @@ Automatically enhance pull request descriptions with concise technical summaries
    **Anti-patterns:**
    ```markdown
    ❌ Data in top-level: "**New `validateUserPermissions` helper** in auth/utils/permissions.ts"
-   ❌ Unstable categories: "Enhanced permission checking with new helper"
-   ❌ Buried artifacts: "Auth refactor involving new validateUserPermissions helper"
+   ❌ Unstable/dynamic categories: "Enhanced permission checking with new helper"
+   ❌ Too many categories: 6+ categories on a small PR
+   ❌ Exceeding word limit: 200+ words
    ```
 
-7. **Update PR description**:
+10. **Update PR description**:
    - If section exists and is accurate → skip update
    - If section exists but needs updates → replace with new content
    - If section doesn't exist → append to end
@@ -264,16 +297,24 @@ Automatically enhance pull request descriptions with concise technical summaries
 
 ## Quick Reference
 
-**Verify:**
-- Top-level bullets are ONLY category labels ending with `:` (stable patterns)
-- ALL data/context in sub-bullets (1-2 per category)
-- Specific artifact names in sub-bullets with `code format`
-- New artifacts as distinct categories
+**Before writing, verify:**
+1. **Scored changes** - Only include items scoring 7+
+2. **Category count** - Matches PR size (Small: 2-3, Medium: 3-4, Large: 4-5)
+3. **Word count** - Within target range, max 150 words
+4. **Format** - Top-level = category with `:`, sub-bullets = all data
+
+**Format checklist:**
+- [ ] Top-level bullets are ONLY stable category labels ending with `:`
+- [ ] ALL context/data in sub-bullets (1-2 per category)
+- [ ] Specific artifacts in `code format`
+- [ ] Each sub-bullet 10-20 words, one sentence
+- [ ] Total ≤150 words
 
 **Avoid:**
 - Data in top-level bullets or missing `:`
 - Unstable/dynamic categories
-- Buried artifacts, padding sub-bullets
+- Exceeding category limits (>5 categories)
+- Exceeding word limit (>150 words)
 
 ## Why This Matters
 
