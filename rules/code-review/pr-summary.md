@@ -2,7 +2,7 @@
 title: "PR Summary Enhancement"
 description: "Enhance pull request descriptions with technical summaries based on commits and code changes"
 slug: "pr_summary"
-when: "New PRs are created or PRs are updated with new commits (when descriptions are empty, minimal, template-only, or implementation diverges from description)"
+when: "New PRs are created, PRs are updated with new commits, or PRs are closed (when descriptions are empty, minimal, template-only, or implementation diverges from description)"
 actions: "Append 'Summary by Gitar' section with 2-5 technical bullet points to PR description"
 ---
 
@@ -11,6 +11,8 @@ actions: "Append 'Summary by Gitar' section with 2-5 technical bullet points to 
 Automatically enhance pull request descriptions with concise technical summaries of changes.
 
 ## When to Use This
+
+**Note:** This rule applies to PR close events as well. If a PR is being closed/merged and the summary is empty or inaccurate, still update it. This ensures all merged PRs have proper documentation for historical reference.
 
 ### Priority 1: Exclusions (Override Everything)
 
