@@ -1,2 +1,4 @@
 name: "Reviews & Collaboration"
+slug: "code-review"
 description: "Enhance code review workflows and team collaboration"
+icon: "git-pull-request"

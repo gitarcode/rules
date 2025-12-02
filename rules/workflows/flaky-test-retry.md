@@ -4,7 +4,6 @@ description: "Automatically retry CI jobs when flaky test failures are detected"
 slug: "flaky_test_retry"
 when: "CI jobs fail with test failures that exhibit flakiness patterns"
 actions: "Detect flaky test patterns and re-trigger failed CI jobs"
-integrations: "github"
 ---
 
 # Flaky Test Auto-Retry
