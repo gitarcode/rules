@@ -1,0 +1,4 @@
+name: "Linear Issue Management"
+slug: "linear"
+description: "Automate Linear issue tracking and PR-to-issue synchronization workflows"
+icon: "linear"

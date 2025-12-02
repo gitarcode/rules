@@ -1,2 +1,4 @@
 name: "Code Quality & Consistency"
+slug: "code-quality"
 description: "Enforce coding standards, style guidelines, and consistency across the codebase"
+icon: "code"

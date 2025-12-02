@@ -21,14 +21,25 @@ Apply when gitar rule markdown files are added or modified.
    ---
    title: "Rule Title"
    description: "Brief 1-2 sentence description"
+   slug: "category_rule_name"
    when: "Natural language trigger description"
    actions: "Brief summary of actions"
-   # integrations: "github" - Optional, managed by maintainers
+   integrations: "linear"  # Only external integrations, not VCS
    ---
    ```
 
-   **Required fields**: `title`, `description`, `when`, `actions`
-   **Optional field**: `integrations` (maintainers add this, contributors should omit)
+   **Required fields**: `title`, `description`, `slug`, `when`, `actions`
+   **Optional field**: `integrations` (only for external services)
+
+   **Slug naming conventions**:
+   - Use snake_case
+   - Prefix with integration name for integration-specific rules (e.g., `linear_pr_linking`, `slack_notify`)
+   - This ensures unique slugs across categories and enables filtering by integration
+
+   **Integrations field conventions**:
+   - **DO NOT** include VCS providers (`github`, `gitlab`, `bitbucket`) - these are implicit from the repository containing the rules
+   - **DO** include external integrations that the rule depends on (e.g., `linear`, `slack`, `jira`, `notion`)
+   - Multiple integrations: `integrations: "linear, slack"`
 
 2. **Check for 3 required sections**:
    - **H1 Title** + 1-2 sentence description

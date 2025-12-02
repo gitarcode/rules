@@ -1,2 +1,4 @@
 name: "Product Quality"
+slug: "product"
 description: "Ensure consistent user-facing product quality including branding, messaging, and localization"
+icon: "package"
