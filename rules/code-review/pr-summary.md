@@ -203,6 +203,8 @@ Automatically enhance pull request descriptions with concise technical summaries
      - Additional detail if needed (one concise sentence)
    - **[Another category]:**
      - Context with artifact in `code format`
+
+   <sub>This will update automatically on new commits.</sub>
    ```
 
    **Format requirements:**
@@ -211,6 +213,7 @@ Automatically enhance pull request descriptions with concise technical summaries
    - **Bold** for categories, `code format` for files/functions/APIs
    - Each sub-bullet: 10-20 words, one sentence
    - Total word count: Stay within target range for PR size (max 150 words)
+   - **Footer**: Always end with `<sub>This will update automatically on new commits.</sub>`
 
    **Example (Medium PR - 3 categories, 45 words):**
    ```markdown
@@ -220,6 +223,8 @@ Automatically enhance pull request descriptions with concise technical summaries
      - `validateUserPermissions` in `auth/utils/permissions.ts` centralizes RBAC logic
    - **Fixed memory leak:**
      - Corrected token refresh timing in `TokenManager.ts:145`
+
+   <sub>This will update automatically on new commits.</sub>
    ```
 
    **Anti-patterns:**
@@ -254,6 +259,8 @@ Automatically enhance pull request descriptions with concise technical summaries
    - **Second bullet point**
      - Sub-detail
 
+   <sub>This will update automatically on new commits.</sub>
+
    ---
    [Any additional content like preview links, Jira links, etc.]
    ```
@@ -267,6 +274,8 @@ Automatically enhance pull request descriptions with concise technical summaries
   - Added barrel export for backward compatibility
 - **New helper:**
   - `buildQueryStringFromFilters` in `utils/dataProcessing/queryString.ts` constructs backend query strings from filter objects
+
+<sub>This will update automatically on new commits.</sub>
 ```
 
 ### Feature Addition
@@ -277,6 +286,8 @@ Automatically enhance pull request descriptions with concise technical summaries
   - `OAuthManager` in `auth/services/OAuthManager.ts` handles provider registration, token exchange, and refresh
 - **New API endpoints:**
   - `POST /api/auth/oauth/initiate`, `GET /api/auth/oauth/callback`, `POST /api/auth/oauth/link`
+
+<sub>This will update automatically on new commits.</sub>
 ```
 
 ### Bug Fix
@@ -285,6 +296,8 @@ Automatically enhance pull request descriptions with concise technical summaries
   - Added `useEffect` cleanup in `hooks/useWebSocket.ts:67` to prevent browser crashes
 - **New lifecycle tracking:**
   - `activeConnections` Map in `WebSocketManager.ts` tracks open connections
+
+<sub>This will update automatically on new commits.</sub>
 ```
 
 ### Dependency Upgrade
@@ -293,6 +306,8 @@ Automatically enhance pull request descriptions with concise technical summaries
   - 18.2 → 18.3 ([release notes](https://react.dev/blog/2024/04/25/react-19)) with improved concurrent rendering and new `use` Hook
 - **Fixed breaking changes:**
   - Replaced deprecated `ReactDOM.render` with `createRoot` in 3 test files
+
+<sub>This will update automatically on new commits.</sub>
 ```
 
 ## Quick Reference
@@ -309,6 +324,7 @@ Automatically enhance pull request descriptions with concise technical summaries
 - [ ] Specific artifacts in `code format`
 - [ ] Each sub-bullet 10-20 words, one sentence
 - [ ] Total ≤150 words
+- [ ] Ends with `<sub>This will update automatically on new commits.</sub>`
 
 **Avoid:**
 - Data in top-level bullets or missing `:`
