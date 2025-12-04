@@ -2,7 +2,7 @@
 title: "String Context for Translation"
 description: "Ensure ambiguous strings in localization files include translator context comments"
 slug: "string_context"
-when: "PRs that modify Android strings.xml, iOS Localizable.strings, or i18n/localization JSON files"
+when: "PR/MRs that modify Android strings.xml, iOS Localizable.strings, or i18n/localization JSON files"
 actions: "Post inline suggestions with context comments and apply 'needs-translation-context' label"
 ---
 
@@ -12,7 +12,7 @@ Ensures ambiguous strings in localization files include translator context comme
 
 ## When to Use This
 
-Apply when PRs modify:
+Apply when modifying:
 - Android `strings.xml`, iOS `Localizable.strings`
 - i18n/localization JSON files (`en.json`, `translations/*.json`)
 
@@ -37,7 +37,7 @@ Apply when PRs modify:
 
 3. **Post inline suggestions** when context is missing:
 
-   **If context can be inferred from PR:**
+   **If context can be inferred:**
    ```markdown
    **Add Translation Context**
 

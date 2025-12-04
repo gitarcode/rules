@@ -2,7 +2,7 @@
 title: "Log Statement Consistency"
 description: "Enforce consistent logging style and structured format across the codebase"
 slug: "log_consistency"
-when: "PRs that add or modify log statements"
+when: "PR/MRs that add or modify log statements"
 actions: "Post inline comments comparing to existing patterns and apply 'logging-style' label"
 ---
 
@@ -12,7 +12,7 @@ Ensures log messages follow consistent style for easier debugging and log analys
 
 ## When to Use This
 
-Apply when PRs add or modify log statements in any language.
+Apply when adding or modifying log statements in any language.
 
 ## How It Works
 

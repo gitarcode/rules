@@ -1,20 +1,20 @@
 ---
-title: "PR Conventions Auto-Fix"
-description: "Automatically fix PR title, grammar, and formatting issues when CI validation fails"
+title: "Conventions Auto-Fix"
+description: "Automatically fix title, grammar, and formatting issues when CI validation fails"
 slug: "pr_conventions_fix"
-when: "CI job fails due to PR title/description validation errors"
+when: "CI job fails due to PR/MR title/description validation errors"
 actions: "Parse validation error, auto-fix title/description grammar and formatting, re-trigger CI"
 ---
 
-# PR Conventions Auto-Fix
+# Conventions Auto-Fix
 
-Automatically fix PR title and description issues (grammar, formatting, layout, issue references) when CI validation fails.
+Automatically fix title and description issues (grammar, formatting, layout, issue references) when CI validation fails.
 
 ## When to Use This
 
-- CI job fails with PR title/description validation errors
+- CI job fails with title/description validation errors
 - Error is a fixable grammar, formatting, or layout issue
-- PR is not a draft
+- Not a draft
 
 Skip if failure requires human judgment (ambiguous meaning, content decisions).
 
@@ -22,22 +22,24 @@ Skip if failure requires human judgment (ambiguous meaning, content decisions).
 
 1. **Identify candidate CI failures** by job name and logs:
 
-   **Job names that suggest PR validation:**
-   - `lint`, `pr-lint`, `title-check`, `pr-check`
+   **Job names that suggest PR/MR validation:**
+   - `lint`, `pr-lint`, `mr-lint`, `title-check`, `pr-check`, `mr-check`
    - `semantic-pr`, `commitlint`, `danger`
-   - `validate-pr`, `pr-validation`, `check-pr-title`
+   - `validate-pr`, `validate-mr`, `pr-validation`, `mr-validation`, `check-pr-title`, `check-mr-title`
 
    **Error patterns in logs:**
    ```
    PR title must match pattern...
+   MR title must match pattern...
    Title should be capitalized
    Title should not end with period
    PR description is empty
+   MR description is empty
    Missing required section
    Missing Jira ticket in title
    No Linear issue found
    Ticket reference required: [PROJ-123]
-   Issue key not found in PR title or branch
+   Issue key not found in PR/MR title or branch
    ```
 
 2. **Parse violation and apply fix**:
@@ -64,7 +66,7 @@ Skip if failure requires human judgment (ambiguous meaning, content decisions).
 
 3. **Apply fix and notify**:
    ```markdown
-   🔧 **Auto-fixed PR structure**
+   🔧 **Auto-fixed structure**
 
    CI failed due to: `Title should not end with period`
 
@@ -76,10 +78,10 @@ Skip if failure requires human judgment (ambiguous meaning, content decisions).
 
 4. **Re-trigger the failed CI job**
 
-5. **Prevent loops**: Max 1 auto-fix attempt per error type per PR
+5. **Prevent loops**: Max 1 auto-fix attempt per error type
 
 ## Why This Matters
 
 - **Reduced friction**: Developers don't wait for trivial formatting fixes
 - **Faster merges**: Eliminates back-and-forth on style issues
-- **Consistent history**: All PRs follow conventions automatically
+- **Consistent history**: All changes follow conventions automatically

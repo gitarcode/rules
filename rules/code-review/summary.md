@@ -1,18 +1,18 @@
 ---
-title: "PR Summary Enhancement"
-description: "Enhance pull request descriptions with technical summaries based on commits and code changes"
+title: "Summary Enhancement"
+description: "Enhance pull/merge request descriptions with technical summaries based on commits and code changes"
 slug: "pr_summary"
-when: "New PRs are created, PRs are updated with new commits, or PRs are closed (when descriptions are empty, minimal, template-only, or implementation diverges from description)"
-actions: "Append 'Summary by Gitar' section with 2-5 technical bullet points to PR description"
+when: "New PR/MRs are created, PR/MRs are updated with new commits, or PR/MRs are closed (when descriptions are empty, minimal, template-only, or implementation diverges from description)"
+actions: "Append 'Summary by Gitar' section with 2-5 technical bullet points to PR/MR description"
 ---
 
-# PR Summary Enhancement
+# Summary Enhancement
 
-Automatically enhance pull request descriptions with concise technical summaries of changes.
+Automatically enhance pull/merge request descriptions with concise technical summaries of changes.
 
 ## When to Use This
 
-**Note:** This rule applies to PR close events as well. If a PR is being closed/merged and the summary is empty or inaccurate, still update it. This ensures all merged PRs have proper documentation for historical reference.
+**Note:** This rule applies to close events as well. If being closed/merged and the summary is empty or inaccurate, still update it. This ensures all merged changes have proper documentation for historical reference.
 
 ### Priority 1: Exclusions (Override Everything)
 
@@ -25,24 +25,24 @@ Automatically enhance pull request descriptions with concise technical summaries
 ### Priority 2: Description Quality Triggers
 
 **ALWAYS apply when:**
-- PR description is empty, null, or only whitespace/HTML comments
+- Description is empty, null, or only whitespace/HTML comments
 - Description contains unfilled template placeholders (e.g., `[TODO]`, `[Add description]`, `[feature/bug/etc]`)
 - Description ≤ 20 characters and adds no meaningful context beyond the title
-- Description semantically matches the PR title (exact match or paraphrase without added detail)
+- Description semantically matches the title (exact match or paraphrase without added detail)
 
 **Apply when:**
-- New pull request with minimal description (21-99 characters)
+- New submission with minimal description (21-99 characters)
 - Description ≥ 100 characters but lacks technical depth (only restates commits or is vague)
 - Meaningful functionality, bug fixes, or architectural changes are introduced
 - Implementation or commits diverge significantly from existing description (e.g., description says "add login" but commits show OAuth, 2FA, SAML integration)
 
 **Do NOT apply for:**
-- PRs with comprehensive descriptions (≥ 100 chars with clear what/why/how/impact)
+- Comprehensive descriptions (≥ 100 chars with clear what/why/how/impact)
 - Cases where summary would add no unique value
 
 ## How It Works
 
-1. **Check exclusions first** - Verify PR doesn't match Priority 1 exclusions (formatting, typos, trivial changes). If it does, STOP and skip.
+1. **Check exclusions first** - Verify changes don't match Priority 1 exclusions (formatting, typos, trivial changes). If they do, STOP and skip.
 
 2. **Detect description quality and apply appropriate mode**:
 
@@ -153,26 +153,26 @@ Automatically enhance pull request descriptions with concise technical summaries
 
    **Only include changes scoring 7 or higher**
 
-7. **Apply adaptive category limits based on PR size**:
+7. **Apply adaptive category limits based on change size**:
 
-   **Flexible Category Count** (adapts to PR complexity):
+   **Flexible Category Count** (adapts to complexity):
 
-   | PR Size | Files Changed | Category Count | Word Target |
+   | Size | Files Changed | Category Count | Word Target |
    |---------|--------------|----------------|-------------|
    | Small | <5 files | 2-3 categories | 30-50 words |
    | Medium | 5-15 files | 3-4 categories | 50-80 words |
    | Large | 15+ files | 4-5 categories | 80-150 words |
 
    **Hard constraints:**
-   - **Minimum**: 2 categories (only if PR truly has <3 important changes)
+   - **Minimum**: 2 categories (only if truly <3 important changes)
    - **Maximum**: 5 categories (hard stop, even if more high-priority items exist)
-   - **Word cap**: 150 words maximum regardless of PR size
+   - **Word cap**: 150 words maximum regardless of size
 
    **Selection process:**
-   1. Count files changed in PR
-   2. Determine PR size category (small/medium/large)
+   1. Count files changed
+   2. Determine size category (small/medium/large)
    3. Filter to changes scoring 7+
-   4. Select top N changes that fit in the category range for that PR size
+   4. Select top N changes that fit in the category range for that size
    5. If filtered changes exceed max categories, take highest-scoring ones only
 
 8. **Use stable category patterns**:
@@ -213,10 +213,10 @@ Automatically enhance pull request descriptions with concise technical summaries
    - **Sub-bullets**: 1-2 per category with ALL context and artifacts in `code format`
    - **Bold** for categories, `code format` for files/functions/APIs
    - Each sub-bullet: 10-20 words, one sentence
-   - Total word count: Stay within target range for PR size (max 150 words)
+   - Total word count: Stay within target range for size (max 150 words)
    - **Footer**: Always end with `<sub>This will update automatically on new commits.</sub>`
 
-   **Example (Medium PR - 3 categories, 45 words):**
+   **Example (Medium - 3 categories, 45 words):**
    ```markdown
    - **Authentication refactor:**
      - Split `auth/AuthService.ts` (800 lines) into 6 modules under `auth/services/*`
@@ -232,11 +232,11 @@ Automatically enhance pull request descriptions with concise technical summaries
    ```markdown
    ❌ Data in top-level: "**New `validateUserPermissions` helper** in auth/utils/permissions.ts"
    ❌ Unstable/dynamic categories: "Enhanced permission checking with new helper"
-   ❌ Too many categories: 6+ categories on a small PR
+   ❌ Too many categories: 6+ categories on a small change
    ❌ Exceeding word limit: 200+ words
    ```
 
-10. **Update PR description**:
+10. **Update description**:
    - If section exists and is accurate → skip update
    - If section exists but needs updates → replace with new content
    - If section doesn't exist → append to end
@@ -249,7 +249,7 @@ Automatically enhance pull request descriptions with concise technical summaries
 
    **Example of correct spacing:**
    ```markdown
-   [Existing PR description content]
+   [Existing description content]
 
    ---
 
@@ -266,7 +266,7 @@ Automatically enhance pull request descriptions with concise technical summaries
    [Any additional content like preview links, Jira links, etc.]
    ```
 
-## Examples by PR Type
+## Examples by Change Type
 
 ### Refactoring
 ```markdown
@@ -315,7 +315,7 @@ Automatically enhance pull request descriptions with concise technical summaries
 
 **Before writing, verify:**
 1. **Scored changes** - Only include items scoring 7+
-2. **Category count** - Matches PR size (Small: 2-3, Medium: 3-4, Large: 4-5)
+2. **Category count** - Matches size (Small: 2-3, Medium: 3-4, Large: 4-5)
 3. **Word count** - Within target range, max 150 words
 4. **Format** - Top-level = category with `:`, sub-bullets = all data
 
@@ -337,6 +337,6 @@ Automatically enhance pull request descriptions with concise technical summaries
 
 - **Improved Code Review Efficiency** - Reviewers get a quick technical overview without reading every commit
 - **Better Documentation** - Creates a clear record of what changed and why
-- **Consistency** - All PRs follow a similar documentation pattern
+- **Consistency** - All changes follow a similar documentation pattern
 - **Time Savings** - Authors don't need to manually update descriptions after each push
 - **Scannability** - Hierarchical structure allows quick understanding at-a-glance
