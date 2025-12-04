@@ -1,31 +1,31 @@
 ---
-title: "PR Close Linear Comment"
-description: "Add implementation summary to linked Linear issues when PRs are merged"
+title: "Merge Close Linear Comment"
+description: "Add implementation summary to linked Linear issues when changes are merged"
 slug: "linear_pr_close_comment"
-when: "PR with linked Linear issue is merged"
+when: "PR/MR with linked Linear issue is merged"
 actions: "Post comment to Linear issue summarizing what was implemented"
 integrations: "linear"
 ---
 
-# PR Close Linear Comment
+# Merge Close Linear Comment
 
-Update linked Linear issues with implementation details when PRs are merged.
+Update linked Linear issues with implementation details when changes are merged.
 
 ## When to Use This
 
-- PR merged (not just closed)
-- PR has linked Linear issue(s)
+- Merged (not just closed)
+- Has linked Linear issue(s)
 - Contains substantive code changes
 
-Skip for abandoned PRs, pure docs changes, or automated dependency updates.
+Skip for abandoned changes, pure docs changes, or automated dependency updates.
 
 ## How It Works
 
-1. **Detect PR merge** and extract linked Linear issues
+1. **Detect merge** and extract linked Linear issues
 2. **Gather details**: commits, files changed, key changes
 3. **Post comment** to each linked issue:
    ```markdown
-   ## PR Merged: [PR Title](link)
+   ## Merged: [Title](link)
 
    **Author:** @username | **Merged:** 2024-01-15
 

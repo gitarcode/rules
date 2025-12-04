@@ -1,21 +1,21 @@
 ---
 title: "Fix Typos"
-description: "Suggest fixes for typos in PR titles, descriptions, and code while learning codebase-specific terminology"
+description: "Suggest fixes for typos in titles, descriptions, and code while learning codebase-specific terminology"
 slug: "fix_typos"
-when: "PRs with new or modified code, comments, documentation, or PR metadata (title/description)"
+when: "PR/MRs with new or modified code, comments, documentation, or metadata (title/description)"
 actions: "Post inline suggestions for typos and update codebase dictionary"
 ---
 
 # Fix Typos
 
-Automatically detect and suggest fixes for spelling errors in PR titles, descriptions, code comments, and documentation while learning codebase-specific terminology.
+Automatically detect and suggest fixes for spelling errors in titles, descriptions, code comments, and documentation while learning codebase-specific terminology.
 
 ## When to Use This
 
-Apply when PRs include:
+Apply when changes include:
 - Changes to code comments or docstrings
 - Updates to README, documentation files, or markdown content
-- New or modified PR titles and descriptions
+- New or modified titles and descriptions
 - String literals in user-facing messages
 - Variable/function names that include English words
 
@@ -29,7 +29,7 @@ Apply when PRs include:
 
 2. **Scan for typos** in multiple locations:
    ```javascript
-   // PR Title: "Implemnt new cache startegy"
+   // Title: "Implemnt new cache startegy"
    // Should be: "Implement new cache strategy"
 
    // Code comment with typo
@@ -63,9 +63,9 @@ Apply when PRs include:
    - "genrate" → "generate"
    ```
 
-5. **Update PR title/description** if typos found:
+5. **Update title/description** if typos found:
    - Post a comment suggesting the corrected title/description
-   - Example: "Consider updating PR title: 'Implemnt new cache startegy' → 'Implement new cache strategy'"
+   - Example: "Consider updating title: 'Implemnt new cache startegy' → 'Implement new cache strategy'"
 
 6. **Learn from feedback**:
    - If author marks suggestion as "not a typo" or ignores it → add to dictionary

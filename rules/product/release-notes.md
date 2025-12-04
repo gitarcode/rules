@@ -1,34 +1,33 @@
 ---
 title: "Release Notes"
-description: "Automatically suggest and update release notes when a release PR is created or updated"
+description: "Automatically suggest and update release notes when a release is created or updated"
 slug: "release_notes"
-when: "PRs targeting the default branch with 'release' keyword in title or changes to release notes files"
+when: "PR/MRs targeting the default branch with 'release' keyword in title or changes to release notes files"
 actions: "Analyze changes since last release and suggest user-facing updates to release notes"
-integrations: "github"
 ---
 
 # Release Notes
 
-Automatically analyze changes and suggest release notes content for release PRs, focusing on user-facing improvements and major changes.
+Automatically analyze changes and suggest release notes content for releases, focusing on user-facing improvements and major changes.
 
 ## When to Use This
 
 Apply when:
-- PR title contains keywords: `release`, `version`, `v1.2.3`, `changelog`
-- PR modifies release notes files: `CHANGELOG.md`, `CHANGELOG.mdx`, `RELEASE_NOTES.md`, `docs/releases/*.md`, `docs/releases/*.mdx`
-- PR is targeting the default branch or `release/*` branches
-- PR description indicates this is a release preparation
+- Title contains keywords: `release`, `version`, `v1.2.3`, `changelog`
+- Modifies release notes files: `CHANGELOG.md`, `CHANGELOG.mdx`, `RELEASE_NOTES.md`, `docs/releases/*.md`, `docs/releases/*.mdx`
+- Targeting the default branch or `release/*` branches
+- Description indicates this is a release preparation
 
 Do NOT apply for:
-- Regular feature PRs not related to releases
+- Regular feature changes not related to releases
 - Hotfix or patch releases (unless requested)
-- Draft PRs still in preparation
+- Drafts still in preparation
 - Internal-only changes or infrastructure updates
 
 ## How It Works
 
 1. **Identify release context**:
-   - Check PR title and description for release version (e.g., `v2.4.0`, `Release 1.5.1`)
+   - Check title and description for release version (e.g., `v2.4.0`, `Release 1.5.1`)
    - Look for existing release notes file in the repository
    - Common locations:
      ```
@@ -42,8 +41,8 @@ Do NOT apply for:
    - Parse the last release date/version from the file
 
 2. **Analyze changes since last release**:
-   - Review commits, merged PRs, and code changes since last release tag or date
-   - Extract screenshots from PR descriptions and comments for visual features
+   - Review commits, merged changes, and code changes since last release tag or date
+   - Extract screenshots from descriptions and comments for visual features
    - Categorize changes into user-relevant groups:
      - **New Features**: User-visible functionality additions
      - **Improvements**: Enhancements to existing features
@@ -64,7 +63,7 @@ Do NOT apply for:
    - Use action-oriented language emphasizing user benefits
    - Group related changes together
    - Include links to relevant documentation or migration guides
-   - Include screenshots from PRs for visual features (or suggest where to add them)
+   - Include screenshots for visual features (or suggest where to add them)
 
    Example format:
    ```markdown
@@ -106,9 +105,9 @@ Do NOT apply for:
    ```
 
    **Rationale**:
-   - Dark mode implementation in PR #1234 adds significant UX improvement
-   - Bulk export feature (PR #1245) addresses top user request
-   - Notification bug (PR #1256) affected 15% of active users
+   - Dark mode implementation (#1234) adds significant UX improvement
+   - Bulk export feature (#1245) addresses top user request
+   - Notification bug (#1256) affected 15% of active users
 
    **Excluded from notes**:
    - Refactored internal caching layer (no user-visible change)
@@ -122,7 +121,7 @@ Do NOT apply for:
 6. **Provide context and reasoning**:
    - Explain why certain changes were included
    - Note which changes were excluded and why
-   - Reference PR numbers for traceability
+   - Reference change numbers for traceability
    - Suggest categories if the project uses them
 
 7. **Handle different release note formats**:

@@ -62,7 +62,7 @@ Do NOT apply for:
      ```
 
 2. **Check retry history**:
-   - Look for previous retry comments on the PR
+   - Look for previous retry comments on the PR/MR
    - Count how many times this job has been retried
    - If retry count >= max retries (default: 2) → do not retry again
 
