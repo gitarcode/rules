@@ -1,0 +1,4 @@
+name: "Slack Notifications"
+slug: "slack"
+description: "Automated Slack DM and channel notifications for PR/MR lifecycle events"
+icon: "slack"
