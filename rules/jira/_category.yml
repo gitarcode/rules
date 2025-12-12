@@ -1,0 +1,4 @@
+name: "Jira Issue Management"
+slug: "jira"
+description: "Automate Jira issue tracking and PR/MR-to-issue synchronization workflows"
+icon: "jira"
