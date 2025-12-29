@@ -37,7 +37,7 @@ Search Linear for potential matches:
 - Issues author recently commented on (7 days)
 
 **Exclude from candidates:**
-- Completed/canceled issues
+- Issues in closed states (Done, Canceled, Completed, Duplicate)
 - Issues already linked to another open PR/MR
 - Issues assigned to others who have their own active branch
 
