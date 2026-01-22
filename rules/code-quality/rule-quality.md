@@ -2,7 +2,7 @@
 title: "Rule Quality Standards"
 description: "Ensures all rules follow established structure, conventions, and include proper YAML frontmatter"
 slug: "rule_quality"
-when: "Gitar rule markdown files are added or modified"
+when: "Files in the .gitar/rules/ folder are added or modified"
 actions: "Post inline comments with structural suggestions and auto-generated frontmatter"
 ---
 
@@ -12,7 +12,7 @@ Ensure all new or modified gitar rule files follow the established conventions a
 
 ## When to Use This
 
-Apply when gitar rule markdown files are added or modified.
+Apply when markdown files in the `.gitar/rules/` folder are added or modified.
 
 ## How It Works
 
