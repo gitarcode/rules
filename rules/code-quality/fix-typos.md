@@ -1,14 +1,14 @@
 ---
 title: "Fix Typos"
-description: "Suggest fixes for typos in titles, descriptions, and code while learning codebase-specific terminology"
+description: "Suggest fixes for typos in titles, descriptions, and code using typos-cli"
 slug: "fix_typos"
 when: "PR/MRs with new or modified code, comments, documentation, or metadata (title/description)"
-actions: "Post inline suggestions for typos and update codebase dictionary"
+actions: "Post inline suggestions for typos, leveraging typos-cli and repo config"
 ---
 
 # Fix Typos
 
-Automatically detect and suggest fixes for spelling errors in titles, descriptions, code comments, and documentation while learning codebase-specific terminology.
+Automatically detect and suggest fixes for spelling errors in titles, descriptions, code comments, and documentation using `typos-cli`.
 
 ## When to Use This
 
@@ -64,4 +64,4 @@ Apply when changes include:
 ## Why This Matters
 
 - **Better Communication**: Clear, typo-free code and documentation improve searchability and reduce misunderstandings
-- **Smart Learning**: Self-improving dictionary learns codebase terminology to reduce false positives over time
+- **Low False Positives**: `typos-cli` has a curated corrections dictionary, and teams can fine-tune via `_typos.toml`
