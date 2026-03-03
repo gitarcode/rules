@@ -17,11 +17,11 @@ To use a rule from this repository:
 mkdir -p .gitar/rules
 
 # Copy a rule you want to use (browse rules/ folder to find rules)
-cp rules/product/brand-consistency.md .gitar/rules/
+cp rules/workflows/flaky-test-retry.md .gitar/rules/
 
 # Commit and push
 git add .gitar/rules/
-git commit -m "Add Gitar brand consistency rule"
+git commit -m "Add Gitar flaky test retry rule"
 git push
 ```
 
@@ -40,12 +40,6 @@ Want additional triggers? [Open an issue](https://github.com/gitar-ai/rules/issu
 ## Available Rules
 
 Browse the `rules/` directory to explore available rules organized by category:
-
-### [Code Quality & Consistency](rules/code-quality/)
-Enforce coding standards, style guidelines, and consistency across the codebase
-
-### [Product Quality](rules/product/)
-Ensure consistent user-facing product quality including branding, messaging, and localization
 
 ### [Reviews & Collaboration](rules/code-review/)
 Enhance code review workflows and team collaboration
