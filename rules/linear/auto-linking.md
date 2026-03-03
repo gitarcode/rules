@@ -2,21 +2,26 @@
 title: "Linear Auto-Linking"
 description: "Find and attach relevant Linear issues to changes without linked tickets"
 slug: "linear_pr_linking"
-when: "PR/MR opened without any Linear issue reference"
+when: "PR/MR is first opened without any Linear issue reference (open event only, not on subsequent updates)"
 actions: "Search author's recent Linear issues, link only with >95% confidence, otherwise suggest candidates"
 integrations: "linear"
 ---
 
 # Linear Auto-Linking
 
-Automatically link relevant Linear issues when changes are created without ticket references, using multi-signal validation to ensure high confidence matches.
+Automatically link relevant Linear issues when a PR/MR is first opened without ticket references, using multi-signal validation to ensure high confidence matches.
 
 ## When to Use This
 
-- Opened with no Linear reference in title, description, or branch name
+**Trigger: Only on PR/MR open events.** Do not run on subsequent pushes, edits, or other updates.
+
+- PR/MR was just opened with no Linear reference in title, description, or branch name
 - Author has Linear integration enabled
 
-Skip if already references a Linear issue or has `no-ticket` label.
+Skip if:
+- Already references a Linear issue
+- Has `no-ticket` label
+- PR/MR was already open (e.g., push to existing PR, description edit, label change)
 
 ## How It Works
 
