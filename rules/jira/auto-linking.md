@@ -2,21 +2,26 @@
 title: "Jira Auto-Linking"
 description: "Find and attach relevant Jira issues to changes without linked tickets"
 slug: "jira_pr_linking"
-when: "PR/MR opened without any Jira issue reference"
+when: "PR/MR is first opened without any Jira issue reference (open event only, not on subsequent updates)"
 actions: "Search author's recent Jira issues, link only with >95% confidence, otherwise suggest candidates"
 integrations: "jira"
 ---
 
 # Jira Auto-Linking
 
-Automatically link relevant Jira issues when changes are created without ticket references, using multi-signal validation to ensure high confidence matches.
+Automatically link relevant Jira issues when a PR/MR is first opened without ticket references, using multi-signal validation to ensure high confidence matches.
 
 ## When to Use This
 
-- Opened with no Jira reference in title, description, or branch name
+**Trigger: Only on PR/MR open events.** Do not run on subsequent pushes, edits, or other updates.
+
+- PR/MR was just opened with no Jira reference in title, description, or branch name
 - Author has Jira integration enabled
 
-Skip if already references a Jira issue or has `no-ticket` label.
+Skip if:
+- Already references a Jira issue
+- Has `no-ticket` label
+- PR/MR was already open (e.g., push to existing PR, description edit, label change)
 
 ## How It Works
 
