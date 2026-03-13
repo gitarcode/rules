@@ -14,7 +14,7 @@ Update linked Jira issues with implementation details when changes are merged.
 ## When to Use This
 
 - Merged (not just closed)
-- Has linked Jira issue(s)
+- Has linked Jira issue(s) — identified by issue keys matching `PROJ-123` pattern (letters+hyphen+digits) in title, description, branch, or PR metadata. Bracket tags like `[Web]` are NOT issue references.
 - Contains substantive code changes
 
 Skip for abandoned changes, pure docs changes, or automated dependency updates.

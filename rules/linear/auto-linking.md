@@ -19,20 +19,21 @@ Automatically link relevant Linear issues when a PR/MR is first opened without t
 - Author has Linear integration enabled
 
 Skip if:
-- Already references a Linear issue
-- Has `no-ticket` label
+- Already references a Linear issue ID (pattern: `TEAM-123` — letters+hyphen+digits, NOT bare bracket tags like `[Web]`)
 - PR/MR was already open (e.g., push to existing PR, description edit, label change)
 
 ## How It Works
 
 ### 1. Check for Existing References
 
-Scan for issue IDs in:
+Scan for Linear issue IDs matching the pattern `TEAM-123` (uppercase letters, hyphen, digits):
 - Branch name (e.g., `eng-123-fix-login-bug`)
-- Title with brackets (e.g., `[ENG-123] Fix login`)
+- Title (e.g., `[ENG-123] Fix login` or `Fix login (ENG-123)`)
 - Description with magic words (e.g., `Fixes ENG-123`)
 
-If found → link directly (explicit reference = 100% confidence).
+**Important:** Bracket-prefixed tags like `[Web]`, `[Frontend]`, `[Docs]` are team/area labels, NOT issue references. Only match patterns with both letters and digits separated by a hyphen (e.g., `ENG-123`, `FE-42`).
+
+If a valid issue ID is found → link directly (explicit reference = 100% confidence).
 
 ### 2. Gather Candidate Issues
 

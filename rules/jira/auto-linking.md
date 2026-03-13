@@ -19,20 +19,21 @@ Automatically link relevant Jira issues when a PR/MR is first opened without tic
 - Author has Jira integration enabled
 
 Skip if:
-- Already references a Jira issue
-- Has `no-ticket` label
+- Already references a Jira issue key (pattern: `PROJ-123` — letters+hyphen+digits, NOT bare bracket tags like `[Web]`)
 - PR/MR was already open (e.g., push to existing PR, description edit, label change)
 
 ## How It Works
 
 ### 1. Check for Existing References
 
-Scan for issue keys in:
+Scan for Jira issue keys matching the pattern `PROJ-123` (uppercase letters, hyphen, digits):
 - Branch name (e.g., `PROJ-123-fix-login-bug`)
-- Title with brackets (e.g., `[PROJ-123] Fix login`)
+- Title (e.g., `[PROJ-123] Fix login` or `Fix login (PROJ-123)`)
 - Description with magic words (e.g., `Fixes PROJ-123`)
 
-If found → link directly (explicit reference = 100% confidence).
+**Important:** Bracket-prefixed tags like `[Web]`, `[Frontend]`, `[Docs]` are team/area labels, NOT issue references. Only match patterns with both letters and digits separated by a hyphen (e.g., `PROJ-123`, `FE-42`).
+
+If a valid issue key is found → link directly (explicit reference = 100% confidence).
 
 ### 2. Gather Candidate Issues
 
