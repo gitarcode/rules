@@ -14,7 +14,7 @@ Update linked Linear issues with implementation details when changes are merged.
 ## When to Use This
 
 - Merged (not just closed)
-- Has linked Linear issue(s)
+- Has linked Linear issue(s) — identified by issue IDs matching `TEAM-123` pattern (letters+hyphen+digits) in title, description, branch, or PR metadata. Bracket tags like `[Web]` are NOT issue references.
 - Contains substantive code changes
 
 Skip for abandoned changes, pure docs changes, or automated dependency updates.
